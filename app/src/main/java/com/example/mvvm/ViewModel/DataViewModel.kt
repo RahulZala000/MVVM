@@ -1,14 +1,29 @@
 package com.example.mvvm.ViewModel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mvvm.Model.MyDataModel
+import androidx.lifecycle.viewModelScope
+import com.example.mvvm.Model.ProductModel
 import com.example.mvvm.Repo.Repository
+import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class DataViewModel(var repo: Repository) :ViewModel() {
 
-    fun viewgetdata():LiveData<List<MyDataModel>>
+    var live:LiveData<List<ProductModel>> = repo.userdata
+
+
+   init{
+       viewModelScope.launch {
+         repo.getdataapi()
+       }
+   }
+   /* fun insetdatadb(user:ProductModel)
     {
-        return repo.getdatarespo()
-    }
+        repo.insertdata(user)
+    }*/
+
+
+
 }

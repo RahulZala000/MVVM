@@ -3,18 +3,27 @@ package com.example.mvvm.Repo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mvvm.Api.APIinterface
-import com.example.mvvm.Api.RetrofitApi
-import com.example.mvvm.Model.MyDataModel
+import com.example.mvvm.Model.ProductModel
+import javax.inject.Inject
 
-class Repository(var retro: APIinterface) {
+class Repository @Inject constructor(var retro: APIinterface) {
 
-    var userdata= MutableLiveData<MyDataModel>()
-    var liveData:LiveData<MyDataModel> = userdata
+    var userdata= MutableLiveData<List<ProductModel>>()
 
+    suspend fun getdataapi() {
+       var res=retro.getdata()
 
-    fun getdatarespo(): LiveData<List<MyDataModel>> {
-        return retro.getdata()
+        if(res.isSuccessful && res.body()!=null)
+            userdata.postValue(res.body())
     }
 
+  /*  fun insertdata(user:MyDataModel)
+    {
+        userDao.insertdata(user)
+    }
 
+    fun getdatadb(): List<MyDataModel>
+    {
+        return userDao.getdata()
+    }*/
 }

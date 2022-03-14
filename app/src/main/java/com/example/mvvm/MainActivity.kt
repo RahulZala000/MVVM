@@ -3,23 +3,41 @@ package com.example.mvvm
 import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import com.example.mvvm.Api.RetrofitApi
-import com.example.mvvm.Repo.Repository
+import android.util.Log
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mvvm.Adapter.ProductAdapter
+import com.example.mvvm.Factory.ProdDataFactory
+import com.example.mvvm.ViewModel.DataViewModel
 import com.example.mvvm.databinding.ActivityMainBinding
-import retrofit2.Retrofit
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ViewDataBinding
+    lateinit var binding: ActivityMainBinding
+    lateinit var viewModel: DataViewModel
+
+    @Inject
+    lateinit var profac:ProdDataFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding= ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        var repo=(application as Application)
+   (application as ProductApplication).appcom.inject(this)
 
+        viewModel=ViewModelProvider(this,profac).get(DataViewModel::class.java)
 
+            viewModel.live?.observe(this, Observer {
+                       binding.dataview.apply {
+                            layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+                            adapter=ProductAdapter(it)
+
+                        }
+              //  Log.d("@test", it.toString())
+             //   binding.pro.text=it.joinToString { x-> x.title +"\n"+ x.desc }
+                })
     }
 }
