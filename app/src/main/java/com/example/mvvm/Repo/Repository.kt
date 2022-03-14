@@ -16,14 +16,4 @@ class Repository @Inject constructor(var retro: APIinterface) {
         if(res.isSuccessful && res.body()!=null)
             userdata.postValue(res.body())
     }
-
-  /*  fun insertdata(user:MyDataModel)
-    {
-        userDao.insertdata(user)
-    }
-
-    fun getdatadb(): List<MyDataModel>
-    {
-        return userDao.getdata()
-    }*/
 }

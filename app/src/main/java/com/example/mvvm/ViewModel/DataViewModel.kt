@@ -19,11 +19,4 @@ class DataViewModel(var repo: Repository) :ViewModel() {
          repo.getdataapi()
        }
    }
-   /* fun insetdatadb(user:ProductModel)
-    {
-        repo.insertdata(user)
-    }*/
-
-
-
 }
