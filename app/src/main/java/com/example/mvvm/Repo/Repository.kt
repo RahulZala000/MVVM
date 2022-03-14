@@ -1,6 +1,5 @@
 package com.example.mvvm.Repo
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mvvm.Api.APIinterface
 import com.example.mvvm.Model.ProductModel
