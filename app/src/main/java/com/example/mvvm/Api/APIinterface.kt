@@ -6,7 +6,6 @@ import retrofit2.http.GET
 
 interface APIinterface {
 
-
     @GET("products")
     suspend fun getdata():Response<List<ProductModel>>
 }

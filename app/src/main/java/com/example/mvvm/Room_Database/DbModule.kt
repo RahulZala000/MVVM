@@ -13,6 +13,6 @@ class DbModule {
     @Provides
     fun getdatabase(context:Context):RoomDb
     {
-        return Room.databaseBuilder(context,RoomDb::class.java,"DbApp").build()
+        return Room.databaseBuilder(context,RoomDb::class.java,"DbApp").allowMainThreadQueries().build()
     }
 }

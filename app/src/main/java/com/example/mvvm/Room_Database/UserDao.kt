@@ -13,7 +13,7 @@ interface UserDao {
     @Query("SELECT * FROM ProductModel")
      fun getdata():List<ProductModel>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
      fun insertdata(user:List<ProductModel>)
 
 }

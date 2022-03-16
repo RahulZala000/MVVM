@@ -11,7 +11,7 @@ import dagger.internal.MapFactory.builder
 
 class ProductApplication : Application() {
 
-     lateinit var appcom:ApplicationComponent
+    lateinit var appcom:ApplicationComponent
 
     override fun onCreate() {
         super.onCreate()
@@ -19,7 +19,4 @@ class ProductApplication : Application() {
         appcom= DaggerApplicationComponent.factory().create(this)
 
     }
-
-
-
 }
