@@ -1,11 +1,10 @@
 package com.example.mvvm.di
 
 import android.content.Context
-import com.example.mvvm.MainActivity
+import com.example.mvvm.activity.MainActivity
 import com.example.mvvm.Room_Database.DbModule
 import dagger.BindsInstance
 import dagger.Component
-import dagger.Module
 import javax.inject.Singleton
 
 

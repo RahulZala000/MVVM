@@ -1,24 +1,20 @@
-package com.example.mvvm
+package com.example.mvvm.activity
 
-import android.app.Application
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvm.Adapter.ProductAdapter
 import com.example.mvvm.Factory.ProdDataFactory
+import com.example.mvvm.Model.APIResponse
+import com.example.mvvm.ProductApplication
 import com.example.mvvm.ViewModel.DataViewModel
 import com.example.mvvm.databinding.ActivityMainBinding
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() ,ProductAdapter.fav{
 
     lateinit var binding: ActivityMainBinding
     lateinit var viewModel: DataViewModel
@@ -34,19 +30,21 @@ class MainActivity : AppCompatActivity() {
 
    (application as ProductApplication).appcom.inject(this)
 
+       supportActionBar!!.title="HOME"// actionBar!!.title="HOME"
+
         viewModel=ViewModelProvider(this,profac).get(DataViewModel::class.java)
 
 
+        viewModel.live.observe(this, Observer {
+            binding.dataview.apply {
+                layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+                adapter=ProductAdapter(it,this@MainActivity)
 
+            }
+        })
+    }
 
-            viewModel.live?.observe(this, Observer {
-                       binding.dataview.apply {
-                            layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-                            adapter=ProductAdapter(it)
+    override fun favlist(temp: String, data: APIResponse) {
 
-                        }
-              //  Log.d("@test", it.toString())
-             //   binding.pro.text=it.joinToString { x-> x.title +"\n"+ x.desc }
-                })
     }
 }
