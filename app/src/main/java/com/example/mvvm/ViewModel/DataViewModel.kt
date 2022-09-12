@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mvvm.Model.APIResponse
+import com.example.mvvm.Model.ArticleModelResponse
 import com.example.mvvm.Model.ProductModel
 import com.example.mvvm.Repo.Repository
 import com.example.mvvm.utils.NetworkCheck
@@ -23,6 +24,7 @@ import retrofit2.Response
 class DataViewModel(var repo: Repository) :ViewModel() {
 
     var live:LiveData<List<APIResponse>> = repo.userdata
+    var data:LiveData<ArticleModelResponse> = repo.onlinedata
 
   init{
        viewModelScope.launch {
