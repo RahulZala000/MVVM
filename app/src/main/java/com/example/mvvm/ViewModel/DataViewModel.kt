@@ -14,12 +14,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.mvvm.Model.ProductModel
 import com.example.mvvm.Repo.Repository
 import com.example.mvvm.utils.NetworkCheck
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import javax.inject.Inject
 
 
-
-class DataViewModel(var repo: Repository) :ViewModel() {
+@HiltViewModel
+class DataViewModel @Inject constructor(var repo: Repository) :ViewModel() {
 
     var live:LiveData<List<ProductModel>> = repo.userdata
 

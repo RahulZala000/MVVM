@@ -1,24 +1,23 @@
 package com.example.mvvm.Repo
 
 import android.content.Context
-import android.os.Build
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.bumptech.glide.util.Util
-import com.example.mvvm.Api.APIinterface
+import androidx.lifecycle.ViewModel
+import com.example.mvvm.Api.ApiInterface
 import com.example.mvvm.Model.ProductModel
-import com.example.mvvm.Room_Database.DbModule
 import com.example.mvvm.Room_Database.RoomDb
-import com.example.mvvm.Room_Database.UserDao
-import com.example.mvvm.di.NetworkModule
 import com.example.mvvm.utils.NetworkCheck
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 
 import javax.inject.Inject
 
-class Repository @Inject constructor(var retro: APIinterface,var db:RoomDb,var context: Context) {
+@Module
+@InstallIn(ViewModelComponent::class)
+class Repository @Inject constructor(var retro: ApiInterface, var db:RoomDb, var context: Context) {
 
     var userdata= MutableLiveData<List<ProductModel>>()
 
